@@ -1,4 +1,4 @@
-# Alhambra Greenscapes LLC Website
+# Florence Greenscapes LLC Website
 
 A ready-to-deploy Vite + React website for a small landscaping LLC offering:
 - Landscaping consulting and design

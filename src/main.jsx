@@ -18,8 +18,8 @@ import "./styles.css";
 
 const business = {
   name: "Florence Oasis LLC",
-  phone: "(626) 555-0188",
-  email: "hello@florenceoasis.com",
+  phone: "(626) 512-0090",
+  email: "florenceoasis25@gmail.com",
   serviceArea: "Duarte, irvine, Lakeforest & nearby communities"
 };
 

@@ -17,10 +17,10 @@ import {
 import "./styles.css";
 
 const business = {
-  name: "Alhambra Greenscapes LLC",
+  name: "Florence Oasis LLC",
   phone: "(626) 555-0188",
-  email: "hello@alhambragreenscapes.com",
-  serviceArea: "Alhambra, Pasadena, San Gabriel Valley & nearby communities"
+  email: "hello@florenceoasis.com",
+  serviceArea: "Duarte, irvine, Lakeforest & nearby communities"
 };
 
 const services = [

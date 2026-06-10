@@ -20,7 +20,7 @@ const business = {
   name: "Florence Oasis LLC",
   phone: "(626) 512-0090",
   email: "florenceoasis25@gmail.com",
-  serviceArea: "Duarte, irvine, Lakeforest & nearby communities"
+  serviceArea: "Irvine, Santa Ana, Lake Forest, Duarte & nearby communities"
 };
 
 const services = [
@@ -101,18 +101,17 @@ function Hero() {
     <section id="home" className="hero">
       <div className="hero-overlay" />
       <div className="hero-content">
-        <p className="eyebrow">Landscaping • Maintenance • Lighting • Irrigation</p>
-        <h1>Beautiful outdoor spaces, built and maintained with care.</h1>
+        <p className="eyebrow">Maintenance • Irrigation • Plant Design • Lighting</p>
+        <h1>Transform Your Property Into a Lush, Sustainable Oasis.</h1>
         <p className="hero-text">
-          Professional landscaping services for homeowners and small businesses who want a clean,
-          functional, and welcoming property year-round.
+          Premium landscaping, meticulous garden maintenance, and smart water-saving irrigation systems for residential properties throughout Orange County and the San Gabriel Valley.
         </p>
         <div className="hero-actions">
           <a className="button primary" href="#contact">Request a Free Estimate</a>
           <a className="button secondary" href="#services">View Services</a>
         </div>
         <div className="trust-row">
-          <span><CheckCircle size={18} /> Local & Reliable</span>
+          <span><CheckCircle size={18} /> Southern California Local</span>
           <span><CheckCircle size={18} /> Clean Workmanship</span>
           <span><CheckCircle size={18} /> Water-Smart Solutions</span>
         </div>
@@ -120,6 +119,7 @@ function Hero() {
     </section>
   );
 }
+
 
 function Services() {
   return (
@@ -181,17 +181,15 @@ function About() {
     <section id="about" className="section split">
       <div>
         <p className="eyebrow">About the Company</p>
-        <h2>A small local crew with professional standards.</h2>
+        <h2>A dedicated local crew with premium professional standards.</h2>
         <p>
-          {business.name} helps property owners improve, maintain, and enjoy their outdoor spaces.
-          The brand message is simple: dependable communication, neat work, practical design,
-          and long-term care.
+          {business.name} helps local homeowners upgrade, protect, and enjoy their outdoor spaces. We built our reputation on dependable communication, immaculate project cleanups, and a deep understanding of unique regional soils and local water optimization guidelines.
         </p>
         <ul className="check-list">
-          <li><CheckCircle /> Clear estimates and scheduling</li>
-          <li><CheckCircle /> Respectful service at residential properties</li>
-          <li><CheckCircle /> Solutions for Southern California water use</li>
-          <li><CheckCircle /> Maintenance plans available</li>
+          <li><CheckCircle size={18} /> Upfront transparent estimates & clear scheduling</li>
+          <li><CheckCircle size={18} /> Respectful, quiet service at residential properties</li>
+          <li><CheckCircle size={18} /> Expert solutions for SoCal drought compliance</li>
+          <li><CheckCircle size={18} /> Flexible recurring maintenance plans available</li>
         </ul>
       </div>
 
@@ -200,13 +198,14 @@ function About() {
           {[1, 2, 3, 4, 5].map((n) => <Star key={n} size={18} fill="currentColor" />)}
         </div>
         <blockquote>
-          “Reliable, clean, and detail-oriented. The yard looks better every visit.”
+          “The response time was incredible for our irrigation repair, and they left the backyard cleaner than it was before they arrived. Highly recommend!”
         </blockquote>
-        <p className="quote-author">Sample client review</p>
+        <p className="quote-author">Satisfied Local Homeowner</p>
       </div>
     </section>
   );
 }
+
 
 function Contact() {
   return (

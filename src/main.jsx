@@ -108,6 +108,45 @@ const portfolio = [
   }
 ];
 
+const processSteps = [
+  {
+    icon: Phone,
+    title: "Tell us what you need",
+    text: "Share your service goals, preferred schedule, and property location.",
+    path: "/start/tell-us",
+    eyebrow: "Step 1",
+    detail: "Start by telling us what you want to improve: maintenance, irrigation, lighting, planting, or a larger yard refresh. The more context you share, the faster we can recommend the right next step.",
+    actions: ["Choose the service you are interested in", "Share your city and preferred timing", "Add notes about access, pets, gates, or problem areas"]
+  },
+  {
+    icon: CalendarDays,
+    title: "Schedule an estimate",
+    text: "We review the site, answer questions, and confirm the best next step.",
+    path: "/start/schedule-estimate",
+    eyebrow: "Step 2",
+    detail: "After we receive your request, we coordinate a convenient time to review your property, confirm priorities, and identify any irrigation, lighting, planting, or maintenance details that affect the scope.",
+    actions: ["Confirm the project address", "Pick a practical visit window", "Walk through goals and concerns on site"]
+  },
+  {
+    icon: ClipboardCheck,
+    title: "Approve the plan",
+    text: "You receive clear scope, priorities, and timing before work begins.",
+    path: "/start/approve-plan",
+    eyebrow: "Step 3",
+    detail: "We keep the plan understandable, so you can approve the work with confidence. You will know the service focus, timing, and next steps before the crew begins.",
+    actions: ["Review the recommended scope", "Confirm service frequency or project timing", "Ask questions before approving the work"]
+  },
+  {
+    icon: Sparkles,
+    title: "Enjoy the results",
+    text: "Our crew completes the work cleanly and keeps your outdoor space maintained.",
+    path: "/start/enjoy-results",
+    eyebrow: "Step 4",
+    detail: "Once the work is complete, your yard is left clean and ready to enjoy. For recurring clients, we can continue with a maintenance schedule that protects the improvement over time.",
+    actions: ["Review the finished work", "Ask for care or watering recommendations", "Set up recurring maintenance if needed"]
+  }
+];
+
 function navigateTo(path) {
   if (getRouteFromHash() === path) {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -314,28 +353,23 @@ function TestimonialCard() {
 }
 
 function ProcessSection() {
-  const steps = [
-    { icon: Phone, title: "Tell us what you need", text: "Share your service goals, preferred schedule, and property location." },
-    { icon: CalendarDays, title: "Schedule an estimate", text: "We review the site, answer questions, and confirm the best next step." },
-    { icon: ClipboardCheck, title: "Approve the plan", text: "You receive clear scope, priorities, and timing before work begins." },
-    { icon: Sparkles, title: "Enjoy the results", text: "Our crew completes the work cleanly and keeps your outdoor space maintained." }
-  ];
-
   return (
     <section className="section process-section">
       <div className="section-heading">
         <p className="eyebrow">Simple Process</p>
         <h2>From first click to finished yard, every step is clear.</h2>
+        <p>Each step now opens a dedicated slide-style page so clients can understand what to do next and start with confidence.</p>
       </div>
       <div className="process-grid">
-        {steps.map((step) => {
+        {processSteps.map((step) => {
           const Icon = step.icon;
           return (
-            <article className="process-card" key={step.title}>
+            <PageLink className="process-card" href={step.path} key={step.title}>
               <Icon size={28} />
               <h3>{step.title}</h3>
               <p>{step.text}</p>
-            </article>
+              <span className="card-link inline">Open this step <ArrowRight size={16} /></span>
+            </PageLink>
           );
         })}
       </div>
@@ -447,6 +481,51 @@ function ContactPage() {
   );
 }
 
+function ProcessStepPage({ step }) {
+  const Icon = step.icon;
+  return (
+    <>
+      <PageHero eyebrow={step.eyebrow} title={step.title} text={step.text} />
+      <section className="section process-detail-section">
+        <div className="process-detail-card">
+          <div className="process-detail-icon"><Icon size={38} /></div>
+          <div>
+            <p className="eyebrow">Client start guide</p>
+            <h2>{step.title}</h2>
+            <p>{step.detail}</p>
+            <ul className="mini-list">
+              {step.actions.map((action) => <li key={action}><CheckCircle size={16} /> {action}</li>)}
+            </ul>
+            <div className="hero-actions detail-actions">
+              <PageLink className="button primary" href={routes.contact}>Start this step</PageLink>
+              <PageLink className="button light" href={routes.services}>Review services</PageLink>
+            </div>
+          </div>
+        </div>
+
+        <div className="section-heading compact">
+          <p className="eyebrow">Continue the process</p>
+          <h2>Choose another step.</h2>
+        </div>
+        <div className="process-grid compact-grid">
+          {processSteps.map((item) => {
+            const StepIcon = item.icon;
+            return (
+              <PageLink className={item.path === step.path ? "process-card active-step" : "process-card"} href={item.path} key={item.path}>
+                <StepIcon size={24} />
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+              </PageLink>
+            );
+          })}
+        </div>
+      </section>
+      <ContactSection />
+    </>
+  );
+}
+
+
 function Footer() {
   return (
     <footer className="footer">
@@ -477,6 +556,12 @@ function NotFoundPage() {
 }
 
 function getPage(pathname) {
+  const processStep = processSteps.find((step) => step.path === pathname);
+
+  if (processStep) {
+    return <ProcessStepPage step={processStep} />;
+  }
+
   switch (pathname) {
     case routes.home:
       return <HomePage />;

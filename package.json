@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "prebuild": "node scripts/validate-source.mjs",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"

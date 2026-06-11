@@ -1,4 +1,3 @@
-
  (cd "$(git rev-parse --show-toplevel)" && git apply --3way <<'EOF' 
 diff --git a/src/main.jsx b/src/main.jsx
 index e357212908934192c37fad094437a863e45b8ff2..6262bb9b0e9ed6bb3c2e2b1085bdefa8121c4a4c 100644

@@ -378,6 +378,29 @@ function ProcessSection() {
 }
 
 function ContactSection() {
+  function handleQuoteSubmit(event) {
+    event.preventDefault();
+
+    const formData = new FormData(event.currentTarget);
+    const request = {
+      name: formData.get("name"),
+      phone: formData.get("phone"),
+      service: formData.get("service"),
+      message: formData.get("message")
+    };
+    const subject = encodeURIComponent(`New estimate request from ${request.name}`);
+    const body = encodeURIComponent([
+      "New website estimate request:",
+      `Name: ${request.name}`,
+      `Phone: ${request.phone}`,
+      `Service Needed: ${request.service}`,
+      `Message: ${request.message || "No message provided"}`,
+      `Submitted From: ${window.location.href}`
+    ].join("\n"));
+
+    window.location.href = `mailto:${business.email}?subject=${subject}&body=${body}`;
+  }
+
   return (
     <section className="section contact-section">
       <div className="contact-panel">
@@ -385,8 +408,7 @@ function ContactSection() {
           <p className="eyebrow">Get Started</p>
           <h2>Request a free estimate.</h2>
           <p>
-            Tell us what you need help with. This form is ready for styling and can later be connected
-            to Formspree, Netlify Forms, EmailJS, or a custom backend.
+            Tell us what you need help with. When a client clicks Submit Request, their information is prepared as an email to the company owner so it can be tracked in the business inbox.
           </p>
           <div className="contact-details">
             <p><Phone size={18} /> <a href={`tel:${business.phone.replace(/[^\d]/g, "")}`}>{business.phone}</a></p>
@@ -395,18 +417,18 @@ function ContactSection() {
           </div>
         </div>
 
-        <form className="quote-form" onSubmit={(e) => e.preventDefault()}>
+        <form className="quote-form" onSubmit={handleQuoteSubmit}>
           <label>
             Full Name
-            <input type="text" placeholder="Your name" />
+            <input name="name" type="text" placeholder="Your name" required />
           </label>
           <label>
             Phone
-            <input type="tel" placeholder="Your phone number" />
+            <input name="phone" type="tel" placeholder="Your phone number" required />
           </label>
           <label>
             Service Needed
-            <select defaultValue="">
+            <select name="service" defaultValue="" required>
               <option value="" disabled>Select a service</option>
               {services.map((service) => <option key={service.title}>{service.title}</option>)}
               <option>Other</option>
@@ -414,9 +436,10 @@ function ContactSection() {
           </label>
           <label>
             Message
-            <textarea rows="4" placeholder="Briefly describe the project..." />
+            <textarea name="message" rows="4" placeholder="Briefly describe the project..." />
           </label>
           <button className="button primary full" type="submit">Submit Request</button>
+          <p className="form-note">Submissions open an email draft to {business.email}. For automatic database/CRM tracking, connect this form to Formspree, EmailJS, Google Sheets, or a Vercel API route later.</p>
         </form>
       </div>
     </section>

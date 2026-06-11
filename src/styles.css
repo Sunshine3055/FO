@@ -722,3 +722,25 @@ textarea {
   font-size: 0.88rem;
   line-height: 1.6;
 }
+
+.submit-feedback {
+  display: grid;
+  gap: 10px;
+  padding: 16px;
+  border-radius: 18px;
+  color: var(--green-900);
+  background: var(--green-100);
+  border: 1px solid rgba(47, 111, 68, 0.22);
+}
+
+.submit-feedback p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.submit-feedback .button.light {
+  background: var(--white);
+  color: var(--green-900);
+  border-color: rgba(47, 111, 68, 0.2);
+}

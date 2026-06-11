@@ -378,6 +378,9 @@ function ProcessSection() {
 }
 
 function ContactSection() {
+  const [submitStatus, setSubmitStatus] = React.useState(null);
+  const [emailDraftLink, setEmailDraftLink] = React.useState("");
+
   function handleQuoteSubmit(event) {
     event.preventDefault();
 
@@ -397,8 +400,11 @@ function ContactSection() {
       `Message: ${request.message || "No message provided"}`,
       `Submitted From: ${window.location.href}`
     ].join("\n"));
+    const mailtoLink = `mailto:${business.email}?subject=${subject}&body=${body}`;
 
-    window.location.href = `mailto:${business.email}?subject=${subject}&body=${body}`;
+    setEmailDraftLink(mailtoLink);
+    setSubmitStatus("ready");
+    window.location.href = mailtoLink;
   }
 
   return (
@@ -439,6 +445,16 @@ function ContactSection() {
             <textarea name="message" rows="4" placeholder="Briefly describe the project..." />
           </label>
           <button className="button primary full" type="submit">Submit Request</button>
+          {submitStatus === "ready" && (
+            <div className="submit-feedback" role="status" aria-live="polite">
+              <strong>Your request is ready to send.</strong>
+              <p>
+                We opened an email draft for the company owner. If it did not open,
+                use the button below to send the request from your email app.
+              </p>
+              <a className="button light full" href={emailDraftLink}>Open Email Draft</a>
+            </div>
+          )}
           <p className="form-note">Submissions open an email draft to {business.email}. For automatic database/CRM tracking, connect this form to Formspree, EmailJS, Google Sheets, or a Vercel API route later.</p>
         </form>
       </div>
